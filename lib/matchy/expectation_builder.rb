@@ -1,12 +1,12 @@
 module Matchy
   module ExpectationBuilder
-    def self.build_expectation(match, exp, obj)
-      return Matchy::Expectations::OperatorExpectation.new(obj, match) unless exp
+    def self.build_expectation(should_succeed, matcher, object)
+      return Matchy::Expectations::OperatorExpectation.new(object, should_succeed) unless matcher
       
-      if match
-        $current_test_case.assert_accepts(exp, obj)
+      if should_succeed
+        $current_test_case.assert_accepts(matcher, object)
       else
-        $current_test_case.assert_rejects(exp, obj)
+        $current_test_case.assert_rejects(matcher, object)
       end
     end
   end
