@@ -30,13 +30,6 @@ module Matchy
           @match_block.call(given, self)
         end
         
-        def fail!(which)
-          @test_case.flunk(which ? failure_message : negative_failure_message)
-        end
-
-        def pass!(which)
-          @test_case.assert true
-        end
         alias_method :failure_message, :positive_msg
         alias_method :negative_failure_message, :negative_msg
       end

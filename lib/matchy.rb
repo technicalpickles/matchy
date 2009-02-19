@@ -24,6 +24,7 @@ end
 require 'rubygems'
 require 'test/unit' unless Matchy.minitest?
 
+require 'matchy/assertions'
 require 'matchy/expectation_builder'
 require 'matchy/modals'
 require 'matchy/version'
@@ -48,7 +49,10 @@ Matchy.test_case_class.class_eval do
   end
 end
 
-Matchy.test_case_class.send(:include, Matchy::Expectations::TestCaseExtensions)
+Matchy.test_case_class.class_eval do
+  include Matchy::Expectations::TestCaseExtensions
+  include Matchy::Assertions
+end
 
 include Matchy::DefMatcher
 

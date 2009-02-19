@@ -3,7 +3,11 @@ module Matchy
     def self.build_expectation(match, exp, obj)
       return Matchy::Expectations::OperatorExpectation.new(obj, match) unless exp
       
-      (exp.matches?(obj) != match) ? exp.fail!(match) : exp.pass!(match)
+      if match
+        $current_test_case.assert_accepts(exp, obj)
+      else
+        $current_test_case.assert_rejects(exp, obj)
+      end
     end
   end
 end
